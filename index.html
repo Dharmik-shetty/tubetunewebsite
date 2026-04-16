@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold-primary: #D4AF37;
-            --gold-secondary: #BD9731;
-            --dark-obsidian: #080808;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --text-white: #ffffff;
-            --text-gray: #a0a0a0;
+            --gold: #D4AF37;
+            --gold-light: #F9E498;
+            --dark: #0A0A0A;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text: #FFFFFF;
+            --text-muted: #A0A0A0;
         }
 
         * {
@@ -23,224 +23,183 @@
         }
 
         body {
-            background-color: var(--dark-obsidian);
-            color: var(--text-white);
+            background-color: var(--dark);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            /* Luxurious Background Pattern */
-            background-image: 
-                radial-gradient(circle at 50% 0%, #1a1a1a 0%, #080808 70%),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: radial-gradient(circle at 50% -20%, #222222 0%, #0A0A0A 80%);
         }
 
-        .phone-container {
+        .mobile-wrapper {
             width: 100%;
             max-width: 480px;
             padding: 40px 24px;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 48px;
         }
 
-        /* Top Branding */
-        .brand-header {
-            margin-bottom: 50px;
-        }
-
-        .logo {
+        .brand-name {
             font-family: 'Playfair Display', serif;
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 700;
-            letter-spacing: -1px;
-            background: linear-gradient(180deg, #F9E498 0%, #D4AF37 100%);
+            letter-spacing: -1.5px;
+            background: linear-gradient(180deg, var(--gold-light), var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .tagline {
-            font-size: 16px;
-            color: var(--gold-primary);
+            font-size: 14px;
+            color: var(--gold);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             font-weight: 600;
         }
 
-        /* Main Content Card */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 32px;
-            padding: 40px 24px;
+        .main-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 30px;
+            padding: 40px 28px;
             width: 100%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-        }
-
-        .headline {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
-        .subtext {
-            color: var(--text-gray);
-            font-size: 17px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
             margin-bottom: 32px;
         }
 
-        /* Download Button */
-        .btn-download {
+        .headline {
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+
+        .download-btn {
             display: block;
-            background: linear-gradient(135deg, #D4AF37 0%, #BD9731 100%);
+            background: linear-gradient(135deg, var(--gold), #B8860B);
             color: #000;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 18px;
-            padding: 20px;
-            border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
-            transition: all 0.3s ease;
-            margin-bottom: 12px;
+            padding: 22px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.3);
+            transition: transform 0.2s;
         }
 
-        .btn-download:active {
-            transform: scale(0.97);
-            background: #D4AF37;
+        .download-btn:active {
+            transform: scale(0.96);
         }
 
-        .apk-meta {
+        .apk-info {
+            display: block;
+            margin-top: 14px;
             font-size: 12px;
-            color: var(--text-gray);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
+            color: var(--text-muted);
         }
 
-        /* Trust Signals */
         .trust-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 16px;
             width: 100%;
-            margin-top: 20px;
         }
 
-        .trust-box {
+        .trust-item {
             background: rgba(255, 255, 255, 0.02);
-            padding: 16px;
-            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 10px;
+            border-radius: 20px;
+            text-align: center;
         }
 
-        .trust-box h4 {
-            font-size: 14px;
-            color: var(--gold-primary);
+        .trust-item h4 {
+            color: var(--gold);
+            font-size: 15px;
             margin-bottom: 4px;
         }
 
-        .trust-box p {
+        .trust-item p {
             font-size: 11px;
-            color: var(--text-gray);
-        }
-
-        /* Security Badge */
-        .security-badge {
-            margin-top: 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(46, 213, 115, 0.1);
-            padding: 8px 16px;
-            border-radius: 100px;
-            border: 1px solid rgba(46, 213, 115, 0.2);
-        }
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: #2ed573;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #2ed573;
-        }
-
-        .badge-text {
-            font-size: 12px;
-            font-weight: 600;
-            color: #2ed573;
+            color: var(--text-muted);
         }
 
         footer {
             margin-top: auto;
-            padding-top: 40px;
-            font-size: 11px;
-            color: rgba(255,255,255,0.2);
-            letter-spacing: 1px;
+            padding: 60px 0 20px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
-    <div class="phone-container">
-        <div class="brand-header">
-            <h1 class="logo">TubeTune</h1>
-            <p class="tagline">Earn Without Effort</p>
-        </div>
 
-        <div class="glass-card">
+    <div class="mobile-wrapper">
+        <header class="header">
+            <h1 class="brand-name">TubeTune</h1>
+            <p class="tagline">Wealth Through Rhythm</p>
+        </header>
+
+        <main class="main-card">
             <h2 class="headline">The new way to earn money without working</h2>
-            <p class="subtext">
-                Earn money just by listening to free YouTube music. No subscription, no strings attached.
+            <p class="description">
+                Listen to your favorite YouTube music for free and earn rewards instantly. Passive income has never sounded this good.
             </p>
 
-            <a href="tubetune-v1.apk" class="btn-download">
+            <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/app-release.apk" class="download-btn">
                 Download TubeTune APK
             </a>
             
-            <div class="apk-meta">
-                <span>V1.0.4</span>
-                <span>•</span>
-                <span>11MB</span>
-                <span>•</span>
-                <span>Verified Clean</span>
-            </div>
-        </div>
+            <span class="apk-info">
+                Official Release • V1.0 • 11MB
+            </span>
+        </main>
 
         <div class="trust-grid">
-            <div class="trust-box">
-                <h4>Encrypted</h4>
-                <p>Private & Secure Data</p>
-            </div>
-            <div class="trust-box">
+            <div class="trust-item">
                 <h4>Verified</h4>
-                <p>100% Safe APK File</p>
+                <p>Safety Inspected</p>
             </div>
-            <div class="trust-box">
-                <h4>Direct Payout</h4>
-                <p>UPI & Bank Support</p>
+            <div class="trust-item">
+                <h4>Passive</h4>
+                <p>Earn While Sleeping</p>
             </div>
-            <div class="trust-box">
-                <h4>24/7 Support</h4>
-                <p>We're here to help</p>
+            <div class="trust-item">
+                <h4>Ad-Free</h4>
+                <p>Pure Music</p>
             </div>
-        </div>
-
-        <div class="security-badge">
-            <div class="badge-dot"></div>
-            <span class="badge-text">SECURE SERVER CONNECTION ACTIVE</span>
+            <div class="trust-item">
+                <h4>Fast Pay</h4>
+                <p>Instant UPI/Bank</p>
+            </div>
         </div>
 
         <footer>
-            &copy; 2026 TUBETUNE PREMIUM • ALL RIGHTS RESERVED
+            &copy; 2026 TubeTune Premium Global
         </footer>
     </div>
+
 </body>
 </html>
