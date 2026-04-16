@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TubeTune | Listen & Earn</title>
+    <title>TubeTune | Earn While You Listen</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -29,7 +29,9 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            background-image: radial-gradient(circle at 50% -20%, #222222 0%, #0A0A0A 80%);
+            /* Luxurious radial gradient background */
+            background-image: 
+                radial-gradient(circle at 50% -20%, #222222 0%, #0A0A0A 80%);
         }
 
         .mobile-wrapper {
@@ -41,6 +43,7 @@
             align-items: center;
         }
 
+        /* Branding */
         .header {
             text-align: center;
             margin-bottom: 48px;
@@ -65,6 +68,7 @@
             font-weight: 600;
         }
 
+        /* Hero Section */
         .main-card {
             background: var(--card-bg);
             backdrop-filter: blur(15px);
@@ -92,6 +96,7 @@
             margin-bottom: 36px;
         }
 
+        /* The Button */
         .download-btn {
             display: block;
             background: linear-gradient(135deg, var(--gold), #B8860B);
@@ -118,6 +123,7 @@
             color: var(--text-muted);
         }
 
+        /* Trust & Security Signals */
         .trust-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -144,9 +150,32 @@
             color: var(--text-muted);
         }
 
+        /* Payout Badge */
+        .payout-status {
+            margin-top: 40px;
+            background: rgba(46, 213, 115, 0.08);
+            border: 1px solid rgba(46, 213, 115, 0.2);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #2ed573;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #2ed573;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #2ed573;
+        }
+
         footer {
             margin-top: auto;
-            padding: 60px 0 20px;
+            padding: 40px 0 20px;
             font-size: 10px;
             color: rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
@@ -179,21 +208,26 @@
 
         <div class="trust-grid">
             <div class="trust-item">
-                <h4>Verified</h4>
-                <p>Safety Inspected</p>
+                <h4>Verified APK</h4>
+                <p>100% Virus Free</p>
             </div>
             <div class="trust-item">
-                <h4>Passive</h4>
-                <p>Earn While Sleeping</p>
+                <h4>No Working</h4>
+                <p>Pure Passive Income</p>
             </div>
             <div class="trust-item">
                 <h4>Ad-Free</h4>
-                <p>Pure Music</p>
+                <p>Premium Experience</p>
             </div>
             <div class="trust-item">
                 <h4>Fast Pay</h4>
-                <p>Instant UPI/Bank</p>
+                <p>Instant Transfers</p>
             </div>
+        </div>
+
+        <div class="payout-status">
+            <div class="status-dot"></div>
+            LIVE: $12,400 PAID OUT TODAY
         </div>
 
         <footer>
