@@ -30,7 +30,6 @@
             overflow-x: hidden;
             display: flex;
             justify-content: center;
-            /* Luxurious Background Pattern */
             background-image: 
                 radial-gradient(circle at 50% 0%, #1a1a1a 0%, #080808 70%),
                 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -47,7 +46,6 @@
             text-align: center;
         }
 
-        /* Top Branding */
         .brand-header {
             margin-bottom: 50px;
         }
@@ -71,7 +69,6 @@
             font-weight: 600;
         }
 
-        /* Main Content Card */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
@@ -87,8 +84,18 @@
         .headline {
             font-size: 28px;
             font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        /* NEW BIG TEXT */
+        .earn-highlight {
+            font-size: 34px;
+            font-weight: 900;
+            color: #D4AF37;
             margin-bottom: 16px;
             line-height: 1.2;
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
         }
 
         .subtext {
@@ -97,7 +104,6 @@
             margin-bottom: 32px;
         }
 
-        /* NEW: Download Box Container */
         .download-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(212, 175, 55, 0.1);
@@ -106,7 +112,6 @@
             margin-top: 10px;
         }
 
-        /* Download Button */
         .btn-download {
             display: block;
             background: linear-gradient(135deg, #D4AF37 0%, #BD9731 100%);
@@ -135,7 +140,6 @@
             gap: 8px;
         }
 
-        /* Trust Signals */
         .trust-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -180,6 +184,10 @@
 
         <div class="glass-card">
             <h2 class="headline">The new way to earn money without working</h2>
+            
+            <!-- NEW TEXT -->
+            <p class="earn-highlight">Earn ₹2000 per day</p>
+
             <p class="subtext">
                 Earn money just by listening to free YouTube music. No subscription, no strings attached.
             </p>
