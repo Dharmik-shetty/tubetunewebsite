@@ -1,231 +1,467 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>TubeTune | Listen & Earn</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
+
         :root {
+
             --gold-primary: #D4AF37;
+
             --gold-secondary: #BD9731;
+
             --dark-obsidian: #080808;
+
             --glass-bg: rgba(255, 255, 255, 0.03);
+
             --text-white: #ffffff;
+
             --text-gray: #a0a0a0;
+
         }
+
+
 
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
             -webkit-tap-highlight-color: transparent;
+
         }
+
+
 
         body {
+
             background-color: var(--dark-obsidian);
+
             color: var(--text-white);
+
             font-family: 'Inter', sans-serif;
+
             line-height: 1.6;
+
             overflow-x: hidden;
+
             display: flex;
+
             justify-content: center;
+
             background-image: 
+
                 radial-gradient(circle at 50% 0%, #1a1a1a 0%, #080808 70%),
+
                 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
         }
+
+
 
         .phone-container {
+
             width: 100%;
+
             max-width: 480px;
+
             padding: 40px 24px;
+
             min-height: 100vh;
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             text-align: center;
+
         }
+
+
 
         .brand-header {
+
             margin-bottom: 50px;
+
         }
+
+
 
         .logo {
+
             font-family: 'Playfair Display', serif;
+
             font-size: 48px;
+
             font-weight: 700;
+
             letter-spacing: -1px;
+
             background: linear-gradient(180deg, #F9E498 0%, #D4AF37 100%);
+
             -webkit-background-clip: text;
+
             -webkit-text-fill-color: transparent;
+
             margin-bottom: 10px;
+
         }
+
+
 
         .tagline {
+
             font-size: 16px;
+
             color: var(--gold-primary);
+
             text-transform: uppercase;
+
             letter-spacing: 3px;
+
             font-weight: 600;
+
         }
+
+
 
         .glass-card {
+
             background: var(--glass-bg);
+
             backdrop-filter: blur(20px);
+
             -webkit-backdrop-filter: blur(20px);
+
             border: 1px solid rgba(212, 175, 55, 0.15);
+
             border-radius: 32px;
+
             padding: 40px 24px;
+
             width: 100%;
+
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
             margin-bottom: 30px;
+
         }
+
+
 
         .headline {
+
             font-size: 28px;
+
             font-weight: 700;
+
             margin-bottom: 10px;
+
             line-height: 1.2;
+
         }
+
+
+
+        /* NEW BIG TEXT */
 
         .earn-highlight {
+
             font-size: 34px;
+
             font-weight: 900;
+
             color: #D4AF37;
+
             margin-bottom: 16px;
+
             line-height: 1.2;
+
             text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+
         }
+
+
 
         .subtext {
+
             color: var(--text-gray);
+
             font-size: 17px;
+
             margin-bottom: 32px;
+
         }
+
+
 
         .download-box {
+
             background: rgba(255, 255, 255, 0.02);
+
             border: 1px solid rgba(212, 175, 55, 0.1);
+
             border-radius: 24px;
+
             padding: 20px;
+
             margin-top: 10px;
+
         }
+
+
 
         .btn-download {
+
             display: block;
+
             background: linear-gradient(135deg, #D4AF37 0%, #BD9731 100%);
+
             color: #000;
+
             text-decoration: none;
+
             font-weight: 700;
+
             font-size: 18px;
+
             padding: 20px;
+
             border-radius: 18px;
+
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
+
             transition: all 0.3s ease;
+
             margin-bottom: 12px;
+
         }
+
+
 
         .btn-download:active {
+
             transform: scale(0.97);
+
             background: #D4AF37;
+
         }
+
+
 
         .apk-meta {
+
             font-size: 12px;
+
             color: var(--text-gray);
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             gap: 8px;
+
         }
+
+
 
         .trust-grid {
+
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
             gap: 12px;
+
             width: 100%;
+
             margin-top: 20px;
+
         }
+
+
 
         .trust-box {
+
             background: rgba(255, 255, 255, 0.02);
+
             padding: 16px;
+
             border-radius: 16px;
+
             border: 1px solid rgba(255, 255, 255, 0.05);
+
         }
+
+
 
         .trust-box h4 {
+
             font-size: 14px;
+
             color: var(--gold-primary);
+
             margin-bottom: 4px;
+
         }
+
+
 
         .trust-box p {
+
             font-size: 11px;
+
             color: var(--text-gray);
+
         }
+
+
 
         footer {
+
             margin-top: auto;
+
             padding: 60px 0 30px;
+
             font-size: 11px;
+
             color: rgba(255,255,255,0.2);
+
             letter-spacing: 1px;
+
         }
+
     </style>
+
 </head>
+
 <body>
+
     <div class="phone-container">
+
         <div class="brand-header">
+
             <h1 class="logo">TubeTune</h1>
+
             <p class="tagline">Earn Without Effort</p>
+
         </div>
+
+
 
         <div class="glass-card">
+
             <h2 class="headline">The new way to earn money without working</h2>
+
+            
+
+            <!-- NEW TEXT -->
+
             <p class="earn-highlight">Earn ₹2000 per day</p>
+
+
+
             <p class="subtext">
+
                 Earn money just by listening to free YouTube music. No subscription, no strings attached.
+
             </p>
 
+
+
             <div class="download-box">
-                <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk" 
-                   id="download-link" 
-                   class="btn-download">
+
+                <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk" class="btn-download">
+
                     Download TubeTune APK
+
                 </a>
+
                 
+
                 <div class="apk-meta">
+
                     <span>V1.0</span>
+
                     <span>•</span>
+
                     <span>11MB</span>
+
                     <span>•</span>
+
                     <span>Verified Clean</span>
+
                 </div>
+
             </div>
+
         </div>
+
+
 
         <div class="trust-grid">
-            <div class="trust-box"><h4>Encrypted</h4><p>Private & Secure Data</p></div>
-            <div class="trust-box"><h4>Verified</h4><p>100% Safe APK File</p></div>
-            <div class="trust-box"><h4>Direct Payout</h4><p>UPI & Bank Support</p></div>
-            <div class="trust-box"><h4>24/7 Support</h4><p>We're here to help</p></div>
+
+            <div class="trust-box">
+
+                <h4>Encrypted</h4>
+
+                <p>Private & Secure Data</p>
+
+            </div>
+
+            <div class="trust-box">
+
+                <h4>Verified</h4>
+
+                <p>100% Safe APK File</p>
+
+            </div>
+
+            <div class="trust-box">
+
+                <h4>Direct Payout</h4>
+
+                <p>UPI & Bank Support</p>
+
+            </div>
+
+            <div class="trust-box">
+
+                <h4>24/7 Support</h4>
+
+                <p>We're here to help</p>
+
+            </div>
+
         </div>
 
+
+
         <footer>
+
             &copy; 2026 TUBETUNE PREMIUM • ALL RIGHTS RESERVED
+
         </footer>
+
     </div>
 
-    <script>
-        const namespace = "tubetune_official_site"; // Unique name for your site
-        const key = "button_clicks_prod";           // Unique key for the button
-
-        document.getElementById('download-link').addEventListener('click', function() {
-            // This sends the "increment" request silently in the background
-            fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-            .catch(err => console.log("Tracking blocked or offline"));
-        });
-    </script>
 </body>
+
 </html>
