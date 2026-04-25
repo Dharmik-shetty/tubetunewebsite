@@ -219,29 +219,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // 1. CONFIGURATION - ADD YOUR DETAILS HERE
+        // Use your project details
         const SUPABASE_URL = 'https://wequiuswvrhiafoyfish.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_38GQzjtWcwalfYY783oo-w_-uFaCCuG';
         
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // 2. INCREMENT LOGIC
-        const downloadBtn = document.getElementById('download-btn');
-
-        async function trackDownload() {
-            try {
-                // Calls the SQL function we created earlier
-                const { error } = await supabase.rpc('increment_downloads', { row_id: 'apk_downloads' });
-                if (error) throw error;
-                console.log("Counter incremented successfully.");
-            } catch (err) {
-                console.error("Tracking error:", err.message);
+        document.getElementById('download-btn').addEventListener('click', async () => {
+            // Fires the database update silently in the background
+            const { error } = await supabaseClient.rpc('increment_downloads', { row_id: 'apk_downloads' });
+            
+            // Only output if something breaks
+            if (error) {
+                console.error('Supabase Error:', error.message);
             }
-        }
-
-        // 3. EVENT LISTENER
-        downloadBtn.addEventListener('click', () => {
-            trackDownload();
         });
     </script>
 </body>
