@@ -88,7 +88,6 @@
             line-height: 1.2;
         }
 
-        /* NEW BIG TEXT */
         .earn-highlight {
             font-size: 34px;
             font-weight: 900;
@@ -184,16 +183,15 @@
 
         <div class="glass-card">
             <h2 class="headline">The new way to earn money without working</h2>
-            
-            <!-- NEW TEXT -->
             <p class="earn-highlight">Earn ₹2000 per day</p>
-
             <p class="subtext">
                 Earn money just by listening to free YouTube music. No subscription, no strings attached.
             </p>
 
             <div class="download-box">
-                <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk" class="btn-download">
+                <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk" 
+                   id="download-link" 
+                   class="btn-download">
                     Download TubeTune APK
                 </a>
                 
@@ -208,27 +206,26 @@
         </div>
 
         <div class="trust-grid">
-            <div class="trust-box">
-                <h4>Encrypted</h4>
-                <p>Private & Secure Data</p>
-            </div>
-            <div class="trust-box">
-                <h4>Verified</h4>
-                <p>100% Safe APK File</p>
-            </div>
-            <div class="trust-box">
-                <h4>Direct Payout</h4>
-                <p>UPI & Bank Support</p>
-            </div>
-            <div class="trust-box">
-                <h4>24/7 Support</h4>
-                <p>We're here to help</p>
-            </div>
+            <div class="trust-box"><h4>Encrypted</h4><p>Private & Secure Data</p></div>
+            <div class="trust-box"><h4>Verified</h4><p>100% Safe APK File</p></div>
+            <div class="trust-box"><h4>Direct Payout</h4><p>UPI & Bank Support</p></div>
+            <div class="trust-box"><h4>24/7 Support</h4><p>We're here to help</p></div>
         </div>
 
         <footer>
             &copy; 2026 TUBETUNE PREMIUM • ALL RIGHTS RESERVED
         </footer>
     </div>
+
+    <script>
+        const namespace = "tubetune_official_site"; // Unique name for your site
+        const key = "button_clicks_prod";           // Unique key for the button
+
+        document.getElementById('download-link').addEventListener('click', function() {
+            // This sends the "increment" request silently in the background
+            fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+            .catch(err => console.log("Tracking blocked or offline"));
+        });
+    </script>
 </body>
 </html>
