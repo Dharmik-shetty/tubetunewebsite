@@ -1,431 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TubeTune — Spotify. YouTube. Free.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --green: #1DB954;
+            --red: #FF2020;
+            --white: #FAFAFA;
+            --dim: rgba(250,250,250,0.45);
+            --card: rgba(255,255,255,0.05);
+            --glow-green: rgba(29,185,84,0.4);
+            --glow-red: rgba(255,32,32,0.4);
+        }
 
-  <title>TubeTune - Free YouTube Music</title>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-  <style>
+        .bg-mesh {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+        .bg-mesh::before {
+            content: '';
+            position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(29,185,84,0.15) 0%, transparent 70%);
+            top: -100px; left: -150px;
+            animation: driftA 8s ease-in-out infinite alternate;
+        }
 
-    body{
-      font-family:'Inter',sans-serif;
-      background:#0b0b0b;
-      color:white;
-      overflow-x:hidden;
-    }
+        .bg-mesh::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,32,32,0.1) 0%, transparent 70%);
+            bottom: -80px; right: -100px;
+            animation: driftB 7s ease-in-out infinite alternate;
+        }
 
-    .bg-glow{
-      position:fixed;
-      width:500px;
-      height:500px;
-      border-radius:50%;
-      background:#ff0000;
-      filter:blur(140px);
-      opacity:0.12;
-      top:-200px;
-      left:50%;
-      transform:translateX(-50%);
-      z-index:-1;
-    }
+        @keyframes driftA { to { transform: translate(60px, 80px); } }
+        @keyframes driftB { to { transform: translate(-40px, -60px); } }
 
-    .container{
-      max-width:480px;
-      margin:auto;
-      padding:24px 18px 140px;
-    }
+        body::after {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    .logo{
-      text-align:center;
-      font-size:34px;
-      font-weight:900;
-      letter-spacing:-1px;
-      margin-top:8px;
-    }
+        .wrap {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 440px;
+            padding: 0 18px 60px;
+        }
 
-    .logo span{
-      color:#ff1f1f;
-    }
 
-    .hero{
-      margin-top:42px;
-      text-align:center;
-    }
 
-    .tag{
-      display:inline-block;
-      background:#161616;
-      border:1px solid #242424;
-      color:#d0d0d0;
-      padding:10px 16px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:600;
-      margin-bottom:24px;
-    }
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0 0;
+        }
 
-    h1{
-      font-size:52px;
-      line-height:0.95;
-      letter-spacing:-2px;
-      font-weight:900;
-      margin-bottom:20px;
-    }
+        .logo-mark {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 18px; font-weight: 900;
+            letter-spacing: -0.5px;
+        }
 
-    h1 span{
-      color:#ff1f1f;
-    }
+        .logo-mark sup { font-size: 9px; color: var(--green); vertical-align: super; letter-spacing: 1px; }
 
-    .subtitle{
-      color:#b8b8b8;
-      font-size:18px;
-      line-height:1.6;
-      margin-bottom:34px;
-    }
+        .live-pill {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(29,185,84,0.1);
+            border: 1px solid rgba(29,185,84,0.25);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 11px; color: var(--green); font-weight: 600;
+        }
 
-    .main-btn{
-      display:block;
-      width:100%;
-      text-align:center;
-      text-decoration:none;
-      color:white;
-      background:#ff1f1f;
-      padding:20px;
-      border-radius:22px;
-      font-size:19px;
-      font-weight:800;
-      box-shadow:0 15px 40px rgba(255,0,0,0.25);
-      transition:0.2s;
-    }
+        .live-dot {
+            width: 6px; height: 6px;
+            background: var(--green); border-radius: 50%;
+            animation: blink 1.2s ease-in-out infinite;
+        }
 
-    .main-btn:active{
-      transform:scale(0.98);
-    }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-    .live{
-      margin-top:16px;
-      color:#9f9f9f;
-      font-size:14px;
-      font-weight:600;
-    }
+        /* HERO */
+        .hero { padding: 44px 0 32px; }
 
-    .live span{
-      color:white;
-    }
+        .app-logos {
+            display: flex; align-items: center; gap: 0;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: slideIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+        }
 
-    .music-card{
-      margin-top:30px;
-      background:#141414;
-      border:1px solid #232323;
-      border-radius:28px;
-      padding:24px;
-    }
+        .app-logo-box {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px;
+        }
 
-    .song{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:18px;
-    }
+        .app-logo-box.spotify { background: #1DB954; box-shadow: 0 0 24px rgba(29,185,84,0.5); z-index: 2; }
+        .app-logo-box.youtube { background: #FF0000; box-shadow: 0 0 24px rgba(255,0,0,0.5); margin-left: -10px; z-index: 1; }
 
-    .song:last-child{
-      margin-bottom:0;
-    }
+        .plus-badge { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 900; margin: 0 14px 0 18px; }
 
-    .cover{
-      width:58px;
-      height:58px;
-      border-radius:16px;
-      background:linear-gradient(135deg,#ff1f1f,#ff6a00);
-      flex-shrink:0;
-    }
+        .free-badge {
+            background: linear-gradient(135deg, #1DB954, #17a349);
+            color: #000;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px; font-weight: 700;
+            padding: 6px 14px; border-radius: 100px; letter-spacing: 1px;
+        }
 
-    .song-info{
-      flex:1;
-    }
+        h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 40px; font-weight: 900;
+            line-height: 1.0; letter-spacing: -2px;
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: slideIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+        }
 
-    .song-info h3{
-      font-size:16px;
-      margin-bottom:4px;
-    }
+        h1 .line2 { color: var(--green); }
+        h1 .yt { color: var(--red); }
 
-    .song-info p{
-      color:#9d9d9d;
-      font-size:13px;
-    }
+        .hero-sub {
+            font-size: 15px; color: var(--dim);
+            line-height: 1.65; margin-bottom: 30px;
+            opacity: 0;
+            animation: slideIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;
+        }
 
-    .play{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      background:#ff1f1f;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:14px;
-      font-weight:700;
-    }
+        .hero-sub strong { color: var(--white); font-weight: 600; }
 
-    .section-title{
-      margin-top:42px;
-      margin-bottom:20px;
-      font-size:30px;
-      font-weight:900;
-      letter-spacing:-1px;
-    }
+        /* PILLS */
+        .pills {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+        }
 
-    .features{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
+        .pill {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px; padding: 7px 14px;
+            font-size: 12px; font-weight: 500;
+        }
 
-    .feature{
-      background:#141414;
-      border:1px solid #232323;
-      border-radius:22px;
-      padding:22px;
-    }
+        .pill .dot { width: 6px; height: 6px; border-radius: 50%; }
+        .pill .dot.g { background: var(--green); }
+        .pill .dot.r { background: var(--red); }
 
-    .feature-top{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:10px;
-    }
+        /* DOWNLOAD BTN */
+        .dl-wrap { opacity: 0; animation: slideIn 0.6s cubic-bezier(0.22,1,0.36,1) 0.5s forwards; }
 
-    .icon{
-      width:52px;
-      height:52px;
-      border-radius:16px;
-      background:#ff1f1f;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:22px;
-    }
+        .btn-main {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; background: var(--green); color: #000;
+            text-decoration: none;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 14px; font-weight: 700;
+            padding: 20px 22px; border-radius: 18px;
+            position: relative; overflow: hidden;
+            box-shadow: 0 0 50px var(--glow-green), 0 20px 40px rgba(0,0,0,0.6);
+            letter-spacing: -0.3px;
+            transition: transform 0.15s ease;
+        }
 
-    .feature h3{
-      font-size:18px;
-    }
+        .btn-main::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 55%);
+        }
 
-    .feature p{
-      color:#afafaf;
-      line-height:1.6;
-      font-size:15px;
-    }
+        .btn-main::after {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            animation: shimmer 2.5s ease 1.5s infinite;
+        }
 
-    .stats{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:22px;
-    }
+        @keyframes shimmer { to { left: 160%; } }
+        .btn-main:active { transform: scale(0.97); }
 
-    .stat{
-      background:#141414;
-      border:1px solid #232323;
-      border-radius:22px;
-      padding:22px;
-    }
+        .btn-left { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+        .btn-title { font-size: 15px; letter-spacing: -0.5px; }
+        .btn-sub { font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 400; opacity: 0.7; }
 
-    .stat h2{
-      font-size:26px;
-      margin-bottom:8px;
-    }
+        .btn-arrow {
+            width: 40px; height: 40px;
+            background: rgba(0,0,0,0.15); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
 
-    .stat p{
-      color:#a8a8a8;
-      font-size:14px;
-      line-height:1.5;
-    }
+        .pulse-outer {
+            position: absolute; inset: -4px; border-radius: 22px;
+            border: 2px solid var(--green); opacity: 0;
+            animation: pulseRing 2.5s ease-out 1.2s infinite;
+        }
 
-    .bottom-cta{
-      position:fixed;
-      bottom:18px;
-      left:50%;
-      transform:translateX(-50%);
-      width:calc(100% - 32px);
-      max-width:448px;
-    }
+        .pulse-outer2 {
+            position: absolute; inset: -8px; border-radius: 26px;
+            border: 1.5px solid var(--green); opacity: 0;
+            animation: pulseRing 2.5s ease-out 1.7s infinite;
+        }
 
-    footer{
-      margin-top:50px;
-      text-align:center;
-      color:#666;
-      font-size:12px;
-    }
+        @keyframes pulseRing { 0%{opacity:0.5;transform:scale(1)} 100%{opacity:0;transform:scale(1.03)} }
 
-  </style>
+        .dl-meta { display: flex; justify-content: center; gap: 10px; margin-top: 12px; }
+        .dl-meta span { font-size: 11px; color: var(--dim); }
+        .dl-meta .sep { color: rgba(255,255,255,0.12); }
+
+        /* SECTION LABEL */
+        .section-label {
+            display: flex; align-items: center; gap: 12px;
+            margin: 42px 0 24px;
+        }
+
+        .section-label::before, .section-label::after {
+            content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07);
+        }
+
+        .section-label span {
+            font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--dim); white-space: nowrap;
+        }
+
+        /* COMPARE */
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+
+        .compare-card {
+            border-radius: 18px; padding: 18px 16px;
+            position: relative; overflow: hidden;
+        }
+
+        .compare-card.them { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+        .compare-card.us { background: rgba(29,185,84,0.08); border: 1px solid rgba(29,185,84,0.25); }
+
+        .card-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; font-weight: 600; }
+        .them .card-label { color: var(--dim); }
+        .us .card-label { color: var(--green); }
+
+        .compare-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 9px; font-size: 12.5px; }
+        .compare-item:last-child { margin-bottom: 0; }
+        .check { color: var(--green); }
+        .cross { color: #FF4444; }
+        .compare-item span { color: var(--dim); }
+        .us .compare-item span { color: var(--white); }
+
+        .price-tag {
+            margin-top: 14px; padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            font-family: 'Unbounded', sans-serif; font-size: 13px;
+        }
+
+        .them .price-tag { color: #FF4444; }
+        .us .price-tag { color: var(--green); }
+
+        /* WAVEFORM */
+        .wave-section {
+            background: rgba(29,185,84,0.05);
+            border: 1px solid rgba(29,185,84,0.15);
+            border-radius: 22px; padding: 22px 18px;
+            margin-bottom: 36px;
+            display: flex; align-items: center; gap: 16px;
+        }
+
+        .wave-bars { display: flex; align-items: center; gap: 3px; height: 38px; flex: 1; }
+
+        .bar {
+            flex: 1; background: var(--green); border-radius: 100px; opacity: 0.6;
+            animation: bounce var(--d, 0.8s) ease-in-out infinite alternate;
+        }
+
+        @keyframes bounce { from{transform:scaleY(0.15);opacity:0.3} to{transform:scaleY(1);opacity:0.85} }
+
+        .wave-text { flex-shrink: 0; text-align: right; }
+        .wave-text p { font-size: 11px; color: var(--dim); }
+        .wave-text strong { font-family: 'Unbounded', sans-serif; font-size: 13px; color: var(--green); }
+
+        /* FEATURES */
+        .feat-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+
+        .feat-row {
+            display: flex; align-items: center; gap: 14px;
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 16px 18px;
+        }
+
+        .feat-emoji { font-size: 22px; flex-shrink: 0; }
+
+        .feat-info h4 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 12px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 3px;
+        }
+
+        .feat-info p { font-size: 12px; color: var(--dim); line-height: 1.4; }
+
+        /* BOTTOM CTA */
+        .bottom-cta { text-align: center; }
+
+        .bottom-cta h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 24px; font-weight: 900;
+            letter-spacing: -1px; line-height: 1.1; margin-bottom: 10px;
+        }
+
+        .bottom-cta h2 em { font-style: normal; color: var(--green); }
+        .bottom-cta p { font-size: 13px; color: var(--dim); margin-bottom: 22px; line-height: 1.6; }
+
+        .btn-final {
+            display: block;
+            background: linear-gradient(135deg, #1DB954 0%, #17a349 100%);
+            color: #000; text-decoration: none;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px; font-weight: 700;
+            padding: 20px; border-radius: 18px;
+            letter-spacing: -0.3px;
+            box-shadow: 0 0 40px var(--glow-green);
+            position: relative; overflow: hidden;
+            transition: transform 0.15s ease;
+        }
+
+        .btn-final::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+        }
+
+        .btn-final:active { transform: scale(0.97); }
+
+        footer { text-align: center; margin-top: 40px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.06); }
+        footer p { font-size: 10px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
 
-  <div class="bg-glow"></div>
+<div class="bg-mesh"></div>
 
-  <div class="container">
+<div class="wrap">
 
-    <div class="logo">
-      Tube<span>Tune</span>
-    </div>
+    <nav>
+        <div class="logo-mark">TubeTune <sup>FREE</sup></div>
+        <div class="live-pill"><div class="live-dot"></div> Available Now</div>
+    </nav>
 
     <div class="hero">
 
-      <div class="tag">
-        FREE YOUTUBE MUSIC STREAMING
-      </div>
-
-      <h1>
-        Listen To <span>Unlimited Music</span> Free
-      </h1>
-
-      <p class="subtitle">
-        Stream millions of YouTube songs instantly with zero ads,
-        unlimited skips, background play, and no subscription needed.
-      </p>
-
-      <a href="#" class="main-btn">
-        Start Listening Free
-      </a>
-
-      <div class="live">
-        <span>18,421</span> people listening right now
-      </div>
-
-    </div>
-
-    <div class="music-card">
-
-      <div class="song">
-        <div class="cover"></div>
-
-        <div class="song-info">
-          <h3>Blinding Lights</h3>
-          <p>The Weeknd</p>
+        <div class="app-logos">
+            <div class="app-logo-box spotify">🎵</div>
+            <div class="app-logo-box youtube">▶</div>
+            <div class="plus-badge">+</div>
+            <div class="free-badge">FREE FOR LIFE</div>
         </div>
 
-        <div class="play">▶</div>
-      </div>
+        <h1>
+            Spotify.<br>
+            <span class="line2">YouTube.</span><br>
+            <span class="yt">Both Free.</span>
+        </h1>
 
-      <div class="song">
-        <div class="cover"></div>
-
-        <div class="song-info">
-          <h3>Starboy</h3>
-          <p>Daft Punk • The Weeknd</p>
-        </div>
-
-        <div class="play">▶</div>
-      </div>
-
-      <div class="song">
-        <div class="cover"></div>
-
-        <div class="song-info">
-          <h3>After Hours</h3>
-          <p>The Weeknd</p>
-        </div>
-
-        <div class="play">▶</div>
-      </div>
-
-    </div>
-
-    <h2 class="section-title">
-      Why TubeTune?
-    </h2>
-
-    <div class="features">
-
-      <div class="feature">
-
-        <div class="feature-top">
-          <div class="icon">♫</div>
-
-          <h3>Unlimited Free Music</h3>
-        </div>
-
-        <p>
-          Stream your favorite songs and playlists without paying for subscriptions.
+        <p class="hero-sub">
+            Stop paying ₹119/month. TubeTune gives you <strong>Spotify-like music streaming</strong> + the entire <strong>YouTube music library</strong> — downloads, zero ads, background play. <strong>100% free. Always.</strong>
         </p>
 
-      </div>
-
-      <div class="feature">
-
-        <div class="feature-top">
-          <div class="icon">⚡</div>
-
-          <h3>Background Playback</h3>
+        <div class="pills">
+            <div class="pill"><div class="dot g"></div> No Subscription</div>
+            <div class="pill"><div class="dot g"></div> Unlimited Downloads</div>
+            <div class="pill"><div class="dot r"></div> Zero Ads</div>
+            <div class="pill"><div class="dot g"></div> Works Offline</div>
+            <div class="pill"><div class="dot g"></div> Background Play</div>
         </div>
 
-        <p>
-          Keep music playing while using other apps or when your screen is off.
-        </p>
-
-      </div>
-
-      <div class="feature">
-
-        <div class="feature-top">
-          <div class="icon">🚫</div>
-
-          <h3>No Annoying Ads</h3>
+        <div class="dl-wrap">
+            <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk"
+               id="download-btn"
+               class="btn-main">
+                <div class="pulse-outer"></div>
+                <div class="pulse-outer2"></div>
+                <div class="btn-left">
+                    <span class="btn-title">Download Free — 11 MB</span>
+                    <span class="btn-sub">Android APK · No sign-up needed</span>
+                </div>
+                <div class="btn-arrow">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M9 2v10M5 8l4 4 4-4M2 15h14" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </a>
+            <div class="dl-meta">
+                <span>v1.0</span><span class="sep">•</span>
+                <span>Verified Safe</span><span class="sep">•</span>
+                <span>Instant Install</span>
+            </div>
         </div>
-
-        <p>
-          Enjoy uninterrupted listening without audio ads breaking your vibe.
-        </p>
-
-      </div>
-
     </div>
 
-    <div class="stats">
+    <div class="section-label"><span>Why switch?</span></div>
 
-      <div class="stat">
-        <h2>10M+</h2>
-        <p>Songs and playlists available instantly</p>
-      </div>
+    <div class="compare">
+        <div class="compare-card them">
+            <div class="card-label">Spotify / YT Premium</div>
+            <div class="compare-item"><span class="cross">✕</span><span>₹119/month</span></div>
+            <div class="compare-item"><span class="cross">✕</span><span>Ads on free plan</span></div>
+            <div class="compare-item"><span class="cross">✕</span><span>No offline free</span></div>
+            <div class="compare-item"><span class="cross">✕</span><span>Lock screen stops</span></div>
+            <div class="price-tag">₹1,428 / year</div>
+        </div>
+        <div class="compare-card us">
+            <div class="card-label">TubeTune</div>
+            <div class="compare-item"><span class="check">✓</span><span>Forever free</span></div>
+            <div class="compare-item"><span class="check">✓</span><span>Zero ads</span></div>
+            <div class="compare-item"><span class="check">✓</span><span>Unlimited offline</span></div>
+            <div class="compare-item"><span class="check">✓</span><span>Background play</span></div>
+            <div class="price-tag">₹0 / year</div>
+        </div>
+    </div>
 
-      <div class="stat">
-        <h2>100%</h2>
-        <p>Free streaming with no premium plan</p>
-      </div>
+    <div class="wave-section">
+        <div class="wave-bars" id="waveBars"></div>
+        <div class="wave-text">
+            <strong>800M+</strong>
+            <p>songs available<br>right now</p>
+        </div>
+    </div>
 
-      <div class="stat">
-        <h2>24/7</h2>
-        <p>Listen anytime from anywhere</p>
-      </div>
+    <div class="section-label"><span>Everything included</span></div>
 
-      <div class="stat">
-        <h2>0 Ads</h2>
-        <p>Clean and distraction-free music experience</p>
-      </div>
+    <div class="feat-list">
+        <div class="feat-row">
+            <div class="feat-emoji">📥</div>
+            <div class="feat-info">
+                <h4>Unlimited Downloads</h4>
+                <p>Save any track, album, or playlist. Listen anywhere, even underground.</p>
+            </div>
+        </div>
+        <div class="feat-row">
+            <div class="feat-emoji">🚫</div>
+            <div class="feat-info">
+                <h4>Completely Ad-Free</h4>
+                <p>Not "skip after 5s." Not "watch to continue." Just music, instantly.</p>
+            </div>
+        </div>
+        <div class="feat-row">
+            <div class="feat-emoji">🔒</div>
+            <div class="feat-info">
+                <h4>Screen-Off Playback</h4>
+                <p>Lock your screen. Music keeps playing. Your battery thanks you too.</p>
+            </div>
+        </div>
+        <div class="feat-row">
+            <div class="feat-emoji">🎚️</div>
+            <div class="feat-info">
+                <h4>Spotify-Like Interface</h4>
+                <p>Queue, playlists, shuffle, repeat — all the controls you love, free.</p>
+            </div>
+        </div>
+        <div class="feat-row">
+            <div class="feat-emoji">▶️</div>
+            <div class="feat-info">
+                <h4>Full YouTube Library</h4>
+                <p>Bollywood, lo-fi, K-pop, classics — every song ever uploaded. All of it.</p>
+            </div>
+        </div>
+    </div>
 
+    <div class="bottom-cta">
+        <h2>Stop paying.<br>Start <em>listening.</em></h2>
+        <p>Millions of songs. Zero rupees. Download once, enjoy forever.</p>
+        <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk"
+           id="download-btn-2"
+           class="btn-final">
+            🎵 Get TubeTune — It's Free Forever
+        </a>
     </div>
 
     <footer>
-      © 2026 TubeTune
+        <p>© 2026 TUBETUNE · FREE FOR LIFE · NO SUBSCRIPTION · NO STRINGS</p>
     </footer>
 
-  </div>
+</div>
 
-  <div class="bottom-cta">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const wb = document.getElementById('waveBars');
+    const dur = [0.55,0.85,0.65,1.0,0.75,0.5,1.2,0.7,0.9,0.6];
+    for (let i = 0; i < 36; i++) {
+        const b = document.createElement('div');
+        b.className = 'bar';
+        b.style.setProperty('--d', (dur[i % dur.length] + Math.random() * 0.25) + 's');
+        b.style.animationDelay = (-Math.random() * 2) + 's';
+        b.style.height = (20 + Math.random() * 80) + '%';
+        wb.appendChild(b);
+    }
 
-    <a href="#" class="main-btn">
-      Open TubeTune
-    </a>
+    const sb = supabase.createClient(
+        'https://wequiuswvrhiafoyfish.supabase.co',
+        'sb_publishable_38GQzjtWcwalfYY783oo-w_-uFaCCuG'
+    );
 
-  </div>
+    async function track() {
+        const { error } = await sb.rpc('increment_downloads', { row_id: 'apk_downloads' });
+        if (error) console.error('Supabase:', error.message);
+    }
 
+    document.getElementById('download-btn').addEventListener('click', track);
+    document.getElementById('download-btn-2').addEventListener('click', track);
+</script>
 </body>
 </html>
