@@ -1,239 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TubeTune | Listen & Earn</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold-primary: #D4AF37;
-            --gold-secondary: #BD9731;
-            --dark-obsidian: #080808;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --text-white: #ffffff;
-            --text-gray: #a0a0a0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>NovaTune | Free YouTube Music</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        body {
-            background-color: var(--dark-obsidian);
-            color: var(--text-white);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            background-image: 
-                radial-gradient(circle at 50% 0%, #1a1a1a 0%, #080808 70%),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
+  <style>
+    :root{
+      --bg:#060606;
+      --card:#111111;
+      --soft:#181818;
+      --text:#ffffff;
+      --muted:#a0a0a0;
 
-        .phone-container {
-            width: 100%;
-            max-width: 480px;
-            padding: 40px 24px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+      --grad1:#ff003c;
+      --grad2:#7b2cff;
+      --grad3:#ff4d00;
+    }
 
-        .brand-header {
-            margin-bottom: 50px;
-        }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      -webkit-tap-highlight-color:transparent;
+    }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            background: linear-gradient(180deg, #F9E498 0%, #D4AF37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
+    body{
+      background:
+        radial-gradient(circle at top, rgba(123,44,255,0.18), transparent 35%),
+        radial-gradient(circle at bottom, rgba(255,0,60,0.15), transparent 35%),
+        var(--bg);
 
-        .tagline {
-            font-size: 16px;
-            color: var(--gold-primary);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 600;
-        }
+      color:var(--text);
+      font-family:'Inter',sans-serif;
+      overflow-x:hidden;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+    }
 
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 32px;
-            padding: 40px 24px;
-            width: 100%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-        }
+    .container{
+      width:100%;
+      max-width:480px;
+      padding:24px 20px 60px;
+      position:relative;
+    }
 
-        .headline {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
+    .glow{
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      filter:blur(80px);
+      z-index:-1;
+      opacity:.35;
+    }
 
-        .earn-highlight {
-            font-size: 34px;
-            font-weight: 900;
-            color: #D4AF37;
-            margin-bottom: 16px;
-            line-height: 1.2;
-            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
-        }
+    .g1{
+      background:#7b2cff;
+      top:-60px;
+      right:-80px;
+    }
 
-        .subtext {
-            color: var(--text-gray);
-            font-size: 17px;
-            margin-bottom: 32px;
-        }
+    .g2{
+      background:#ff003c;
+      bottom:100px;
+      left:-100px;
+    }
 
-        .download-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            border-radius: 24px;
-            padding: 20px;
-            margin-top: 10px;
-        }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:40px;
+    }
 
-        .btn-download {
-            display: block;
-            background: linear-gradient(135deg, #D4AF37 0%, #BD9731 100%);
-            color: #000;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            padding: 20px;
-            border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
-            transition: all 0.3s ease;
-            margin-bottom: 12px;
-        }
+    .logo{
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-1px;
+      background:linear-gradient(90deg,var(--grad1),var(--grad2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-        .btn-download:active {
-            transform: scale(0.97);
-            background: #D4AF37;
-        }
+    .pill{
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#d6d6d6;
+      font-size:12px;
+      font-weight:600;
+    }
 
-        .apk-meta {
-            font-size: 12px;
-            color: var(--text-gray);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
+    .hero{
+      margin-top:30px;
+    }
 
-        .trust-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            width: 100%;
-            margin-top: 20px;
-        }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      margin-bottom:24px;
+      font-size:13px;
+      color:#d8d8d8;
+      font-weight:600;
+    }
 
-        .trust-box {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 16px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#00ff88;
+      box-shadow:0 0 12px #00ff88;
+    }
 
-        .trust-box h4 {
-            font-size: 14px;
-            color: var(--gold-primary);
-            margin-bottom: 4px;
-        }
+    h1{
+      font-size:52px;
+      line-height:0.95;
+      letter-spacing:-3px;
+      font-weight:900;
+      margin-bottom:22px;
+    }
 
-        .trust-box p {
-            font-size: 11px;
-            color: var(--text-gray);
-        }
+    .gradient{
+      background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
 
-        footer {
-            margin-top: auto;
-            padding: 60px 0 30px;
-            font-size: 11px;
-            color: rgba(255,255,255,0.2);
-            letter-spacing: 1px;
-        }
-    </style>
+    .sub{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.6;
+      margin-bottom:34px;
+    }
+
+    .cta{
+      display:block;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      color:white;
+      font-weight:800;
+      font-size:18px;
+      padding:20px;
+      border-radius:22px;
+
+      background:linear-gradient(135deg,var(--grad1),var(--grad2));
+
+      box-shadow:
+        0 15px 40px rgba(123,44,255,.35),
+        0 8px 20px rgba(255,0,60,.25);
+
+      transition:.2s ease;
+    }
+
+    .cta:active{
+      transform:scale(.97);
+    }
+
+    .meta{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-top:16px;
+      color:#8f8f8f;
+      font-size:12px;
+      flex-wrap:wrap;
+    }
+
+    .card{
+      margin-top:28px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:28px;
+      padding:22px;
+      backdrop-filter:blur(18px);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:20px;
+      padding:20px;
+    }
+
+    .stat h3{
+      font-size:14px;
+      margin-bottom:8px;
+      color:#ffffff;
+    }
+
+    .stat p{
+      color:#9b9b9b;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .feature{
+      display:flex;
+      gap:16px;
+      margin-bottom:24px;
+      align-items:flex-start;
+    }
+
+    .icon{
+      min-width:52px;
+      height:52px;
+      border-radius:18px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      font-weight:700;
+    }
+
+    .feature h4{
+      font-size:17px;
+      margin-bottom:6px;
+    }
+
+    .feature p{
+      color:#9f9f9f;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .section-title{
+      margin-top:42px;
+      margin-bottom:20px;
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:-1px;
+    }
+
+    .steps{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .step{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:22px;
+      padding:18px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+
+    .step-num{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+    }
+
+    .download-counter{
+      margin-top:28px;
+      text-align:center;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .download-counter h2{
+      font-size:30px;
+      margin-bottom:6px;
+      font-weight:900;
+    }
+
+    .download-counter p{
+      color:#9f9f9f;
+      font-size:14px;
+    }
+
+    footer{
+      margin-top:50px;
+      text-align:center;
+      color:#666;
+      font-size:12px;
+      line-height:1.8;
+    }
+
+    .floating-btn{
+      position:fixed;
+      bottom:18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:calc(100% - 32px);
+      max-width:448px;
+      z-index:999;
+    }
+
+    .equalizer{
+      display:flex;
+      gap:4px;
+      align-items:flex-end;
+      height:22px;
+      margin-left:8px;
+    }
+
+    .equalizer span{
+      width:4px;
+      background:white;
+      border-radius:20px;
+      animation:bounce 1s infinite ease-in-out;
+    }
+
+    .equalizer span:nth-child(1){height:10px;animation-delay:.1s;}
+    .equalizer span:nth-child(2){height:18px;animation-delay:.2s;}
+    .equalizer span:nth-child(3){height:14px;animation-delay:.3s;}
+    .equalizer span:nth-child(4){height:22px;animation-delay:.4s;}
+
+    @keyframes bounce{
+      0%,100%{transform:scaleY(.7);}
+      50%{transform:scaleY(1.2);}
+    }
+  </style>
 </head>
+
 <body>
-    <div class="phone-container">
-        <div class="brand-header">
-            <h1 class="logo">TubeTune</h1>
-            <p class="tagline">Earn Without Effort</p>
-        </div>
 
-        <div class="glass-card">
-            <h2 class="headline">The new way to earn money without working</h2>
-            <p class="earn-highlight">Earn ₹2000 per day</p>
-            <p class="subtext">
-                Earn money just by listening to free YouTube music. No subscription, no strings attached.
-            </p>
+  <div class="container">
 
-            <div class="download-box">
-                <a href="https://github.com/Dharmik-shetty/tubetunewebsite/releases/latest/download/TubeTune.apk" 
-                   id="download-btn"
-                   class="btn-download">
-                    Download TubeTune APK
-                </a>
-                
-                <div class="apk-meta">
-                    <span>V1.0</span>
-                    <span>•</span>
-                    <span>11MB</span>
-                    <span>•</span>
-                    <span>Verified Clean</span>
-                </div>
-            </div>
-        </div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
 
-        <div class="trust-grid">
-            <div class="trust-box"><h4>Encrypted</h4><p>Private & Secure Data</p></div>
-            <div class="trust-box"><h4>Verified</h4><p>100% Safe APK File</p></div>
-            <div class="trust-box"><h4>Direct Payout</h4><p>UPI & Bank Support</p></div>
-            <div class="trust-box"><h4>24/7 Support</h4><p>We're here to help</p></div>
-        </div>
-
-        <footer>
-            &copy; 2026 TUBETUNE PREMIUM • ALL RIGHTS RESERVED
-        </footer>
+    <div class="topbar">
+      <div class="logo">NovaTune</div>
+      <div class="pill">FREE MUSIC</div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // Use your project details
-        const SUPABASE_URL = 'https://wequiuswvrhiafoyfish.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_38GQzjtWcwalfYY783oo-w_-uFaCCuG';
-        
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    <div class="hero">
 
-        document.getElementById('download-btn').addEventListener('click', async () => {
-            // Fires the database update silently in the background
-            const { error } = await supabaseClient.rpc('increment_downloads', { row_id: 'apk_downloads' });
-            
-            // Only output if something breaks
-            if (error) {
-                console.error('Supabase Error:', error.message);
-            }
-        });
-    </script>
+      <div class="badge">
+        <div class="dot"></div>
+        Unlimited Downloads Enabled
+      </div>
+
+      <h1>
+        FREE<br>
+        <span class="gradient">YouTube Music</span><br>
+        Forever.
+      </h1>
+
+      <p class="sub">
+        Download unlimited songs, playlists, and videos directly to your phone.
+        Listen offline anytime with zero ads and zero subscriptions.
+      </p>
+
+      <a
+        href="https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/app.apk"
+        class="cta"
+        id="downloadBtn"
+      >
+        Download Unlimited Music
+      </a>
+
+      <div class="meta">
+        <span>Android 8+</span>
+        <span>•</span>
+        <span>11MB</span>
+        <span>•</span>
+        <span>No Login Required</span>
+      </div>
+
+    </div>
+
+    <div class="download-counter">
+      <h2 id="counter">12,481</h2>
+      <p>downloads in the last 24 hours</p>
+    </div>
+
+    <div class="card">
+
+      <div class="feature">
+        <div class="icon">↓</div>
+
+        <div>
+          <h4>Unlimited Downloads</h4>
+          <p>
+            Save entire playlists and songs instantly with one tap.
+          </p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="icon">♫</div>
+
+        <div>
+          <h4>Offline Listening</h4>
+          <p>
+            Listen anywhere without internet or buffering.
+          </p>
+        </div>
+      </div>
+
+      <div class="feature" style="margin-bottom:0;">
+        <div class="icon">⚡</div>
+
+        <div>
+          <h4>Ultra Fast Engine</h4>
+          <p>
+            Lightweight app optimized for all Android devices.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="section-title">How It Works</h2>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+
+        <div>
+          Paste a YouTube link
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+
+        <div>
+          Tap download instantly
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+
+        <div>
+          Listen offline forever
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <h3>10M+ Songs</h3>
+        <p>Unlimited access to music and playlists.</p>
+      </div>
+
+      <div class="stat">
+        <h3>100% Free</h3>
+        <p>No subscriptions or hidden payments.</p>
+      </div>
+
+      <div class="stat">
+        <h3>Zero Ads</h3>
+        <p>Clean and distraction-free listening.</p>
+      </div>
+
+      <div class="stat">
+        <h3>Fast Installs</h3>
+        <p>Lightweight APK that installs in seconds.</p>
+      </div>
+
+    </div>
+
+    <footer>
+      © 2026 NOVATUNE • FREE MUSIC FOR EVERYONE
+    </footer>
+
+  </div>
+
+  <div class="floating-btn">
+    <a
+      href="https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/app.apk"
+      class="cta"
+    >
+      Get Free Music Now
+
+      <span class="equalizer">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </a>
+  </div>
+
+  <script>
+    // Fake animated counter
+    let counter = document.getElementById("counter");
+    let count = 12481;
+
+    setInterval(() => {
+      count += Math.floor(Math.random() * 3);
+      counter.innerText = count.toLocaleString();
+    }, 2500);
+
+    // Button pulse effect
+    const buttons = document.querySelectorAll('.cta');
+
+    setInterval(() => {
+      buttons.forEach(btn => {
+        btn.style.transform = 'scale(1.02)';
+
+        setTimeout(() => {
+          btn.style.transform = 'scale(1)';
+        }, 180);
+      });
+    }, 3500);
+  </script>
+
 </body>
 </html>
