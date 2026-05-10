@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>TubeTune - Free YouTube Music Downloader</title>
+  <title>TubeTune - Free YouTube Music</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+
     *{
       margin:0;
       padding:0;
@@ -17,162 +18,209 @@
 
     body{
       font-family:'Inter',sans-serif;
-      background:#0f0f0f;
+      background:#0b0b0b;
       color:white;
-      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    .bg-glow{
+      position:fixed;
+      width:500px;
+      height:500px;
+      border-radius:50%;
+      background:#ff0000;
+      filter:blur(140px);
+      opacity:0.12;
+      top:-200px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:-1;
     }
 
     .container{
       max-width:480px;
       margin:auto;
-      padding:24px 18px 120px;
+      padding:24px 18px 140px;
     }
 
     .logo{
-      font-size:32px;
-      font-weight:800;
       text-align:center;
-      margin-top:10px;
-      margin-bottom:10px;
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:-1px;
+      margin-top:8px;
     }
 
     .logo span{
-      color:#ff0000;
-    }
-
-    .top-badge{
-      background:#1f1f1f;
-      border:1px solid #2a2a2a;
-      color:#d0d0d0;
-      width:fit-content;
-      margin:auto;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:600;
+      color:#ff1f1f;
     }
 
     .hero{
-      margin-top:38px;
+      margin-top:42px;
       text-align:center;
     }
 
-    .hero h1{
-      font-size:42px;
-      line-height:1.05;
-      font-weight:800;
-      margin-bottom:18px;
-    }
-
-    .hero h1 span{
-      color:#ff2d2d;
-    }
-
-    .subtitle{
-      color:#b3b3b3;
-      font-size:17px;
-      margin-bottom:28px;
-    }
-
-    .download-btn{
-      display:block;
-      width:100%;
-      text-decoration:none;
-      text-align:center;
-      background:#ff0000;
-      color:white;
-      padding:18px;
-      border-radius:16px;
-      font-size:18px;
-      font-weight:700;
-      transition:0.2s;
-    }
-
-    .download-btn:active{
-      transform:scale(0.98);
-    }
-
-    .small-text{
-      text-align:center;
-      color:#8d8d8d;
-      margin-top:14px;
+    .tag{
+      display:inline-block;
+      background:#161616;
+      border:1px solid #242424;
+      color:#d0d0d0;
+      padding:10px 16px;
+      border-radius:999px;
       font-size:13px;
-    }
-
-    .card{
-      background:#181818;
-      border:1px solid #262626;
-      border-radius:22px;
-      padding:22px;
-      margin-top:24px;
-    }
-
-    .feature{
-      display:flex;
-      gap:16px;
+      font-weight:600;
       margin-bottom:24px;
     }
 
-    .feature:last-child{
+    h1{
+      font-size:52px;
+      line-height:0.95;
+      letter-spacing:-2px;
+      font-weight:900;
+      margin-bottom:20px;
+    }
+
+    h1 span{
+      color:#ff1f1f;
+    }
+
+    .subtitle{
+      color:#b8b8b8;
+      font-size:18px;
+      line-height:1.6;
+      margin-bottom:34px;
+    }
+
+    .main-btn{
+      display:block;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      color:white;
+      background:#ff1f1f;
+      padding:20px;
+      border-radius:22px;
+      font-size:19px;
+      font-weight:800;
+      box-shadow:0 15px 40px rgba(255,0,0,0.25);
+      transition:0.2s;
+    }
+
+    .main-btn:active{
+      transform:scale(0.98);
+    }
+
+    .live{
+      margin-top:16px;
+      color:#9f9f9f;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .live span{
+      color:white;
+    }
+
+    .music-card{
+      margin-top:30px;
+      background:#141414;
+      border:1px solid #232323;
+      border-radius:28px;
+      padding:24px;
+    }
+
+    .song{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .song:last-child{
       margin-bottom:0;
     }
 
+    .cover{
+      width:58px;
+      height:58px;
+      border-radius:16px;
+      background:linear-gradient(135deg,#ff1f1f,#ff6a00);
+      flex-shrink:0;
+    }
+
+    .song-info{
+      flex:1;
+    }
+
+    .song-info h3{
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    .song-info p{
+      color:#9d9d9d;
+      font-size:13px;
+    }
+
+    .play{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:#ff1f1f;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .section-title{
+      margin-top:42px;
+      margin-bottom:20px;
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-1px;
+    }
+
+    .features{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .feature{
+      background:#141414;
+      border:1px solid #232323;
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .feature-top{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:10px;
+    }
+
     .icon{
-      min-width:52px;
+      width:52px;
       height:52px;
-      background:#ff0000;
-      border-radius:14px;
+      border-radius:16px;
+      background:#ff1f1f;
       display:flex;
       align-items:center;
       justify-content:center;
       font-size:22px;
-      font-weight:700;
     }
 
     .feature h3{
-      font-size:17px;
-      margin-bottom:6px;
+      font-size:18px;
     }
 
     .feature p{
-      color:#b0b0b0;
-      font-size:14px;
-    }
-
-    .section-title{
-      font-size:28px;
-      font-weight:800;
-      margin-top:42px;
-      margin-bottom:20px;
-    }
-
-    .steps{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .step{
-      background:#181818;
-      border:1px solid #262626;
-      border-radius:18px;
-      padding:18px;
-      display:flex;
-      align-items:center;
-      gap:14px;
-      font-weight:600;
-    }
-
-    .step-number{
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      background:#ff0000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      color:#afafaf;
+      line-height:1.6;
       font-size:15px;
-      font-weight:700;
     }
 
     .stats{
@@ -183,52 +231,24 @@
     }
 
     .stat{
-      background:#181818;
-      border:1px solid #262626;
-      border-radius:18px;
-      padding:18px;
+      background:#141414;
+      border:1px solid #232323;
+      border-radius:22px;
+      padding:22px;
     }
 
-    .stat h4{
-      font-size:20px;
-      margin-bottom:6px;
+    .stat h2{
+      font-size:26px;
+      margin-bottom:8px;
     }
 
     .stat p{
-      color:#aaaaaa;
-      font-size:13px;
-    }
-
-    .reviews{
-      margin-top:40px;
-    }
-
-    .review{
-      background:#181818;
-      border:1px solid #262626;
-      border-radius:18px;
-      padding:18px;
-      margin-bottom:14px;
-    }
-
-    .review-name{
-      font-weight:700;
-      margin-bottom:6px;
-    }
-
-    .review-text{
-      color:#b3b3b3;
+      color:#a8a8a8;
       font-size:14px;
+      line-height:1.5;
     }
 
-    .footer{
-      margin-top:50px;
-      text-align:center;
-      color:#666;
-      font-size:12px;
-    }
-
-    .floating{
+    .bottom-cta{
       position:fixed;
       bottom:18px;
       left:50%;
@@ -237,12 +257,11 @@
       max-width:448px;
     }
 
-    .counter{
-      margin-top:18px;
+    footer{
+      margin-top:50px;
       text-align:center;
-      color:#9c9c9c;
-      font-size:14px;
-      font-weight:600;
+      color:#666;
+      font-size:12px;
     }
 
   </style>
@@ -250,176 +269,160 @@
 
 <body>
 
+  <div class="bg-glow"></div>
+
   <div class="container">
 
     <div class="logo">
       Tube<span>Tune</span>
     </div>
 
-    <div class="top-badge">
-      FREE YOUTUBE MUSIC DOWNLOADER
-    </div>
-
     <div class="hero">
 
+      <div class="tag">
+        FREE YOUTUBE MUSIC STREAMING
+      </div>
+
       <h1>
-        Download <span>Unlimited Music</span> From YouTube
+        Listen To <span>Unlimited Music</span> Free
       </h1>
 
       <p class="subtitle">
-        Save songs, playlists, and videos directly to your phone.
-        Listen offline anytime without ads or subscriptions.
+        Stream millions of YouTube songs instantly with zero ads,
+        unlimited skips, background play, and no subscription needed.
       </p>
 
-      <a href="#" class="download-btn">
-        Download TubeTune APK
+      <a href="#" class="main-btn">
+        Start Listening Free
       </a>
 
-      <div class="small-text">
-        Android • Fast Install • No Login Required
-      </div>
-
-      <div class="counter">
-        12,481 downloads today
+      <div class="live">
+        <span>18,421</span> people listening right now
       </div>
 
     </div>
 
-    <div class="card">
+    <div class="music-card">
 
-      <div class="feature">
-        <div class="icon">↓</div>
+      <div class="song">
+        <div class="cover"></div>
 
-        <div>
-          <h3>Unlimited Downloads</h3>
-
-          <p>
-            Download any YouTube song or playlist instantly with one tap.
-          </p>
+        <div class="song-info">
+          <h3>Blinding Lights</h3>
+          <p>The Weeknd</p>
         </div>
+
+        <div class="play">▶</div>
       </div>
 
-      <div class="feature">
-        <div class="icon">♫</div>
+      <div class="song">
+        <div class="cover"></div>
 
-        <div>
-          <h3>Offline Listening</h3>
-
-          <p>
-            Listen to your music anywhere without internet or buffering.
-          </p>
+        <div class="song-info">
+          <h3>Starboy</h3>
+          <p>Daft Punk • The Weeknd</p>
         </div>
+
+        <div class="play">▶</div>
       </div>
 
-      <div class="feature">
-        <div class="icon">⚡</div>
+      <div class="song">
+        <div class="cover"></div>
 
-        <div>
-          <h3>Fast & Lightweight</h3>
-
-          <p>
-            Small app size with fast downloads on all Android devices.
-          </p>
+        <div class="song-info">
+          <h3>After Hours</h3>
+          <p>The Weeknd</p>
         </div>
+
+        <div class="play">▶</div>
       </div>
 
     </div>
 
     <h2 class="section-title">
-      How It Works
+      Why TubeTune?
     </h2>
 
-    <div class="steps">
+    <div class="features">
 
-      <div class="step">
-        <div class="step-number">1</div>
-        Copy a YouTube link
+      <div class="feature">
+
+        <div class="feature-top">
+          <div class="icon">♫</div>
+
+          <h3>Unlimited Free Music</h3>
+        </div>
+
+        <p>
+          Stream your favorite songs and playlists without paying for subscriptions.
+        </p>
+
       </div>
 
-      <div class="step">
-        <div class="step-number">2</div>
-        Paste it into TubeTune
+      <div class="feature">
+
+        <div class="feature-top">
+          <div class="icon">⚡</div>
+
+          <h3>Background Playback</h3>
+        </div>
+
+        <p>
+          Keep music playing while using other apps or when your screen is off.
+        </p>
+
       </div>
 
-      <div class="step">
-        <div class="step-number">3</div>
-        Download and listen offline
+      <div class="feature">
+
+        <div class="feature-top">
+          <div class="icon">🚫</div>
+
+          <h3>No Annoying Ads</h3>
+        </div>
+
+        <p>
+          Enjoy uninterrupted listening without audio ads breaking your vibe.
+        </p>
+
       </div>
 
     </div>
-
-    <h2 class="section-title">
-      Why People Love TubeTune
-    </h2>
 
     <div class="stats">
 
       <div class="stat">
-        <h4>10M+</h4>
-        <p>Songs available to download</p>
+        <h2>10M+</h2>
+        <p>Songs and playlists available instantly</p>
       </div>
 
       <div class="stat">
-        <h4>100%</h4>
-        <p>Free forever with no subscription</p>
+        <h2>100%</h2>
+        <p>Free streaming with no premium plan</p>
       </div>
 
       <div class="stat">
-        <h4>No Ads</h4>
-        <p>Clean and simple music experience</p>
+        <h2>24/7</h2>
+        <p>Listen anytime from anywhere</p>
       </div>
 
       <div class="stat">
-        <h4>11MB</h4>
-        <p>Lightweight and fast installation</p>
+        <h2>0 Ads</h2>
+        <p>Clean and distraction-free music experience</p>
       </div>
 
     </div>
 
-    <div class="reviews">
-
-      <div class="review">
-        <div class="review-name">
-          ★★★★★ Alex
-        </div>
-
-        <div class="review-text">
-          "Best app for downloading YouTube music. Super fast and easy."
-        </div>
-      </div>
-
-      <div class="review">
-        <div class="review-name">
-          ★★★★★ Ryan
-        </div>
-
-        <div class="review-text">
-          "I replaced Spotify with this. Offline music works perfectly."
-        </div>
-      </div>
-
-      <div class="review">
-        <div class="review-name">
-          ★★★★★ Sarah
-        </div>
-
-        <div class="review-text">
-          "Simple, clean, and actually works unlike most apps."
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer">
-      © 2026 TubeTune • Free Music For Everyone
-    </div>
+    <footer>
+      © 2026 TubeTune
+    </footer>
 
   </div>
 
-  <div class="floating">
+  <div class="bottom-cta">
 
-    <a href="#" class="download-btn">
-      Get Free Music Now
+    <a href="#" class="main-btn">
+      Open TubeTune
     </a>
 
   </div>
