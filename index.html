@@ -2,228 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>NovaTune | Free YouTube Music</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>TubeTune - Free YouTube Music Downloader</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#060606;
-      --card:#111111;
-      --soft:#181818;
-      --text:#ffffff;
-      --muted:#a0a0a0;
-
-      --grad1:#ff003c;
-      --grad2:#7b2cff;
-      --grad3:#ff4d00;
-    }
-
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      -webkit-tap-highlight-color:transparent;
     }
 
     body{
-      background:
-        radial-gradient(circle at top, rgba(123,44,255,0.18), transparent 35%),
-        radial-gradient(circle at bottom, rgba(255,0,60,0.15), transparent 35%),
-        var(--bg);
-
-      color:var(--text);
       font-family:'Inter',sans-serif;
-      overflow-x:hidden;
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
+      background:#0f0f0f;
+      color:white;
+      line-height:1.5;
     }
 
     .container{
-      width:100%;
       max-width:480px;
-      padding:24px 20px 60px;
-      position:relative;
-    }
-
-    .glow{
-      position:absolute;
-      width:220px;
-      height:220px;
-      border-radius:50%;
-      filter:blur(80px);
-      z-index:-1;
-      opacity:.35;
-    }
-
-    .g1{
-      background:#7b2cff;
-      top:-60px;
-      right:-80px;
-    }
-
-    .g2{
-      background:#ff003c;
-      bottom:100px;
-      left:-100px;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:40px;
+      margin:auto;
+      padding:24px 18px 120px;
     }
 
     .logo{
-      font-size:30px;
-      font-weight:900;
-      letter-spacing:-1px;
-      background:linear-gradient(90deg,var(--grad1),var(--grad2));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+      font-size:32px;
+      font-weight:800;
+      text-align:center;
+      margin-top:10px;
+      margin-bottom:10px;
     }
 
-    .pill{
+    .logo span{
+      color:#ff0000;
+    }
+
+    .top-badge{
+      background:#1f1f1f;
+      border:1px solid #2a2a2a;
+      color:#d0d0d0;
+      width:fit-content;
+      margin:auto;
       padding:8px 14px;
       border-radius:999px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.08);
-      color:#d6d6d6;
-      font-size:12px;
+      font-size:13px;
       font-weight:600;
     }
 
     .hero{
-      margin-top:30px;
+      margin-top:38px;
+      text-align:center;
     }
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.08);
-      margin-bottom:24px;
-      font-size:13px;
-      color:#d8d8d8;
-      font-weight:600;
+    .hero h1{
+      font-size:42px;
+      line-height:1.05;
+      font-weight:800;
+      margin-bottom:18px;
     }
 
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:#00ff88;
-      box-shadow:0 0 12px #00ff88;
+    .hero h1 span{
+      color:#ff2d2d;
     }
 
-    h1{
-      font-size:52px;
-      line-height:0.95;
-      letter-spacing:-3px;
-      font-weight:900;
-      margin-bottom:22px;
+    .subtitle{
+      color:#b3b3b3;
+      font-size:17px;
+      margin-bottom:28px;
     }
 
-    .gradient{
-      background:linear-gradient(90deg,var(--grad1),var(--grad2),var(--grad3));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-
-    .sub{
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.6;
-      margin-bottom:34px;
-    }
-
-    .cta{
+    .download-btn{
       display:block;
       width:100%;
-      text-align:center;
       text-decoration:none;
+      text-align:center;
+      background:#ff0000;
       color:white;
-      font-weight:800;
+      padding:18px;
+      border-radius:16px;
       font-size:18px;
-      padding:20px;
-      border-radius:22px;
-
-      background:linear-gradient(135deg,var(--grad1),var(--grad2));
-
-      box-shadow:
-        0 15px 40px rgba(123,44,255,.35),
-        0 8px 20px rgba(255,0,60,.25);
-
-      transition:.2s ease;
+      font-weight:700;
+      transition:0.2s;
     }
 
-    .cta:active{
-      transform:scale(.97);
+    .download-btn:active{
+      transform:scale(0.98);
     }
 
-    .meta{
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      margin-top:16px;
-      color:#8f8f8f;
-      font-size:12px;
-      flex-wrap:wrap;
+    .small-text{
+      text-align:center;
+      color:#8d8d8d;
+      margin-top:14px;
+      font-size:13px;
     }
 
     .card{
-      margin-top:28px;
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.06);
-      border-radius:28px;
+      background:#181818;
+      border:1px solid #262626;
+      border-radius:22px;
       padding:22px;
-      backdrop-filter:blur(18px);
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:26px;
-    }
-
-    .stat{
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,255,255,0.06);
-      border-radius:20px;
-      padding:20px;
-    }
-
-    .stat h3{
-      font-size:14px;
-      margin-bottom:8px;
-      color:#ffffff;
-    }
-
-    .stat p{
-      color:#9b9b9b;
-      font-size:13px;
-      line-height:1.5;
+      margin-top:24px;
     }
 
     .feature{
       display:flex;
       gap:16px;
       margin-bottom:24px;
-      align-items:flex-start;
+    }
+
+    .feature:last-child{
+      margin-bottom:0;
     }
 
     .icon{
       min-width:52px;
       height:52px;
-      border-radius:18px;
-      background:linear-gradient(135deg,var(--grad1),var(--grad2));
+      background:#ff0000;
+      border-radius:14px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -231,23 +129,21 @@
       font-weight:700;
     }
 
-    .feature h4{
+    .feature h3{
       font-size:17px;
       margin-bottom:6px;
     }
 
     .feature p{
-      color:#9f9f9f;
-      line-height:1.5;
+      color:#b0b0b0;
       font-size:14px;
     }
 
     .section-title{
-      margin-top:42px;
-      margin-bottom:20px;
       font-size:28px;
       font-weight:800;
-      letter-spacing:-1px;
+      margin-top:42px;
+      margin-bottom:20px;
     }
 
     .steps{
@@ -257,88 +153,98 @@
     }
 
     .step{
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.06);
-      border-radius:22px;
+      background:#181818;
+      border:1px solid #262626;
+      border-radius:18px;
       padding:18px;
       display:flex;
-      gap:16px;
       align-items:center;
+      gap:14px;
+      font-weight:600;
     }
 
-    .step-num{
-      width:38px;
-      height:38px;
-      border-radius:12px;
-      background:linear-gradient(135deg,var(--grad1),var(--grad2));
+    .step-number{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:#ff0000;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-weight:800;
+      font-size:15px;
+      font-weight:700;
     }
 
-    .download-counter{
-      margin-top:28px;
-      text-align:center;
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .stat{
+      background:#181818;
+      border:1px solid #262626;
+      border-radius:18px;
       padding:18px;
-      border-radius:22px;
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(255,255,255,0.06);
     }
 
-    .download-counter h2{
-      font-size:30px;
+    .stat h4{
+      font-size:20px;
       margin-bottom:6px;
-      font-weight:900;
     }
 
-    .download-counter p{
-      color:#9f9f9f;
+    .stat p{
+      color:#aaaaaa;
+      font-size:13px;
+    }
+
+    .reviews{
+      margin-top:40px;
+    }
+
+    .review{
+      background:#181818;
+      border:1px solid #262626;
+      border-radius:18px;
+      padding:18px;
+      margin-bottom:14px;
+    }
+
+    .review-name{
+      font-weight:700;
+      margin-bottom:6px;
+    }
+
+    .review-text{
+      color:#b3b3b3;
       font-size:14px;
     }
 
-    footer{
+    .footer{
       margin-top:50px;
       text-align:center;
       color:#666;
       font-size:12px;
-      line-height:1.8;
     }
 
-    .floating-btn{
+    .floating{
       position:fixed;
       bottom:18px;
       left:50%;
       transform:translateX(-50%);
       width:calc(100% - 32px);
       max-width:448px;
-      z-index:999;
     }
 
-    .equalizer{
-      display:flex;
-      gap:4px;
-      align-items:flex-end;
-      height:22px;
-      margin-left:8px;
+    .counter{
+      margin-top:18px;
+      text-align:center;
+      color:#9c9c9c;
+      font-size:14px;
+      font-weight:600;
     }
 
-    .equalizer span{
-      width:4px;
-      background:white;
-      border-radius:20px;
-      animation:bounce 1s infinite ease-in-out;
-    }
-
-    .equalizer span:nth-child(1){height:10px;animation-delay:.1s;}
-    .equalizer span:nth-child(2){height:18px;animation-delay:.2s;}
-    .equalizer span:nth-child(3){height:14px;animation-delay:.3s;}
-    .equalizer span:nth-child(4){height:22px;animation-delay:.4s;}
-
-    @keyframes bounce{
-      0%,100%{transform:scaleY(.7);}
-      50%{transform:scaleY(1.2);}
-    }
   </style>
 </head>
 
@@ -346,53 +252,37 @@
 
   <div class="container">
 
-    <div class="glow g1"></div>
-    <div class="glow g2"></div>
+    <div class="logo">
+      Tube<span>Tune</span>
+    </div>
 
-    <div class="topbar">
-      <div class="logo">NovaTune</div>
-      <div class="pill">FREE MUSIC</div>
+    <div class="top-badge">
+      FREE YOUTUBE MUSIC DOWNLOADER
     </div>
 
     <div class="hero">
 
-      <div class="badge">
-        <div class="dot"></div>
-        Unlimited Downloads Enabled
-      </div>
-
       <h1>
-        FREE<br>
-        <span class="gradient">YouTube Music</span><br>
-        Forever.
+        Download <span>Unlimited Music</span> From YouTube
       </h1>
 
-      <p class="sub">
-        Download unlimited songs, playlists, and videos directly to your phone.
-        Listen offline anytime with zero ads and zero subscriptions.
+      <p class="subtitle">
+        Save songs, playlists, and videos directly to your phone.
+        Listen offline anytime without ads or subscriptions.
       </p>
 
-      <a
-        href="https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/app.apk"
-        class="cta"
-        id="downloadBtn"
-      >
-        Download Unlimited Music
+      <a href="#" class="download-btn">
+        Download TubeTune APK
       </a>
 
-      <div class="meta">
-        <span>Android 8+</span>
-        <span>•</span>
-        <span>11MB</span>
-        <span>•</span>
-        <span>No Login Required</span>
+      <div class="small-text">
+        Android • Fast Install • No Login Required
       </div>
 
-    </div>
+      <div class="counter">
+        12,481 downloads today
+      </div>
 
-    <div class="download-counter">
-      <h2 id="counter">12,481</h2>
-      <p>downloads in the last 24 hours</p>
     </div>
 
     <div class="card">
@@ -401,9 +291,10 @@
         <div class="icon">↓</div>
 
         <div>
-          <h4>Unlimited Downloads</h4>
+          <h3>Unlimited Downloads</h3>
+
           <p>
-            Save entire playlists and songs instantly with one tap.
+            Download any YouTube song or playlist instantly with one tap.
           </p>
         </div>
       </div>
@@ -412,125 +303,126 @@
         <div class="icon">♫</div>
 
         <div>
-          <h4>Offline Listening</h4>
+          <h3>Offline Listening</h3>
+
           <p>
-            Listen anywhere without internet or buffering.
+            Listen to your music anywhere without internet or buffering.
           </p>
         </div>
       </div>
 
-      <div class="feature" style="margin-bottom:0;">
+      <div class="feature">
         <div class="icon">⚡</div>
 
         <div>
-          <h4>Ultra Fast Engine</h4>
+          <h3>Fast & Lightweight</h3>
+
           <p>
-            Lightweight app optimized for all Android devices.
+            Small app size with fast downloads on all Android devices.
           </p>
         </div>
       </div>
 
     </div>
 
-    <h2 class="section-title">How It Works</h2>
+    <h2 class="section-title">
+      How It Works
+    </h2>
 
     <div class="steps">
 
       <div class="step">
-        <div class="step-num">1</div>
-
-        <div>
-          Paste a YouTube link
-        </div>
+        <div class="step-number">1</div>
+        Copy a YouTube link
       </div>
 
       <div class="step">
-        <div class="step-num">2</div>
-
-        <div>
-          Tap download instantly
-        </div>
+        <div class="step-number">2</div>
+        Paste it into TubeTune
       </div>
 
       <div class="step">
-        <div class="step-num">3</div>
-
-        <div>
-          Listen offline forever
-        </div>
+        <div class="step-number">3</div>
+        Download and listen offline
       </div>
 
     </div>
+
+    <h2 class="section-title">
+      Why People Love TubeTune
+    </h2>
 
     <div class="stats">
 
       <div class="stat">
-        <h3>10M+ Songs</h3>
-        <p>Unlimited access to music and playlists.</p>
+        <h4>10M+</h4>
+        <p>Songs available to download</p>
       </div>
 
       <div class="stat">
-        <h3>100% Free</h3>
-        <p>No subscriptions or hidden payments.</p>
+        <h4>100%</h4>
+        <p>Free forever with no subscription</p>
       </div>
 
       <div class="stat">
-        <h3>Zero Ads</h3>
-        <p>Clean and distraction-free listening.</p>
+        <h4>No Ads</h4>
+        <p>Clean and simple music experience</p>
       </div>
 
       <div class="stat">
-        <h3>Fast Installs</h3>
-        <p>Lightweight APK that installs in seconds.</p>
+        <h4>11MB</h4>
+        <p>Lightweight and fast installation</p>
       </div>
 
     </div>
 
-    <footer>
-      © 2026 NOVATUNE • FREE MUSIC FOR EVERYONE
-    </footer>
+    <div class="reviews">
+
+      <div class="review">
+        <div class="review-name">
+          ★★★★★ Alex
+        </div>
+
+        <div class="review-text">
+          "Best app for downloading YouTube music. Super fast and easy."
+        </div>
+      </div>
+
+      <div class="review">
+        <div class="review-name">
+          ★★★★★ Ryan
+        </div>
+
+        <div class="review-text">
+          "I replaced Spotify with this. Offline music works perfectly."
+        </div>
+      </div>
+
+      <div class="review">
+        <div class="review-name">
+          ★★★★★ Sarah
+        </div>
+
+        <div class="review-text">
+          "Simple, clean, and actually works unlike most apps."
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © 2026 TubeTune • Free Music For Everyone
+    </div>
 
   </div>
 
-  <div class="floating-btn">
-    <a
-      href="https://github.com/YOUR_USERNAME/YOUR_REPO/releases/latest/download/app.apk"
-      class="cta"
-    >
+  <div class="floating">
+
+    <a href="#" class="download-btn">
       Get Free Music Now
-
-      <span class="equalizer">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
     </a>
+
   </div>
-
-  <script>
-    // Fake animated counter
-    let counter = document.getElementById("counter");
-    let count = 12481;
-
-    setInterval(() => {
-      count += Math.floor(Math.random() * 3);
-      counter.innerText = count.toLocaleString();
-    }, 2500);
-
-    // Button pulse effect
-    const buttons = document.querySelectorAll('.cta');
-
-    setInterval(() => {
-      buttons.forEach(btn => {
-        btn.style.transform = 'scale(1.02)';
-
-        setTimeout(() => {
-          btn.style.transform = 'scale(1)';
-        }, 180);
-      });
-    }, 3500);
-  </script>
 
 </body>
 </html>
